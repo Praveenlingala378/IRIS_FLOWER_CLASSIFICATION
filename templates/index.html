@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('templates\image1.jpg'); /* Replace 'your-background-image.jpg' with the URL or path to your background image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7); /* Add a semi-transparent white background to make the form stand out */
+            border: 1px solid #dddddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flower Classification</h1>
+        <form action="/predict" method="POST" onsubmit="return validateForm()">
+            <label for="sepal_length">Sepal Length:</label>
+            <input type="text" name="sepal_length" id="sepal_length"><br>
+
+            <label for="sepal_width">Sepal Width:</label>
+            <input type="text" name="sepal_width" id="sepal_width"><br>
+
+            <label for="petal_length">Petal Length:</label>
+            <input type="text" name="petal_length" id="petal_length"><br>
+
+            <label for="petal_width">Petal Width:</label>
+            <input type="text" name="petal_width" id="petal_width"><br>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        <!-- Result display div -->
+        <div class="result">
+            Class: <span id="resultText"></span>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Get input values
+            var sepal_length = document.getElementById("sepal_length").value;
+            var sepal_width = document.getElementById("sepal_width").value;
+            var petal_length = document.getElementById("petal_length").value;
+            var petal_width = document.getElementById("petal_width").value;
+
+            // Check if any of the fields are empty
+            if (sepal_length === "" || sepal_width === "" || petal_length === "" || petal_width === "") {
+                alert("Please fill in all fields."); // Display an alert message
+                return false; // Prevent form submission
+            }
+
+            // Form is valid; allow submission
+            return true;
+        }
+        
+        // Function to display the result in an alert
+        function displayResult(result) {
+            alert("Class: " + result);
+        }
+    </script>
+</body>
+</html>
